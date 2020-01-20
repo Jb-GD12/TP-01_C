@@ -79,6 +79,11 @@ int main (){
 					lifePtPlayer -= 8;
 					printf("\nVous etes empoisonne.\n");
 					printf("Vous perdez 8 PV\n");
+					
+					if(lifePtPlayer <= 0){
+						boolVictoire = 1;
+						printf("\nVous sombrez dans les ténèbres, vous avez perdu...\n");
+					}
 				}
 				
 				if(tamponDefP == 1){
@@ -131,6 +136,10 @@ int main (){
 						dommage = (10 + ctqDommage);
 						printf("le slime prend %d de degat\n", dommage);
 					}
+					if(lifePtMob <= 0){
+						boolVictoire = 1;
+						printf("\nBravo ! Vous avez gagne !\n");
+					}
 				}
 				
 				//Fonction Def
@@ -167,9 +176,7 @@ int main (){
 					
 					//Sous-fonction heal
 					if(action == 1){
-						
 						printf("Vous lancez Soin !\n");
-						
 						lifePtPlayer += 15;
 						//vérification pour que les pts de vie ne dépassent pas 100.
 						if(lifePtPlayer > 100){
@@ -182,9 +189,7 @@ int main (){
 							compteurPsnP = 0;
 							printf("Sort critique !\nVous n'etes plus empoisonne !\n");
 						}
-						
 						printf("Vous gagnez 15PV");
-						
 						manaPtPlayer -= 5;
 					}
 					
@@ -193,10 +198,8 @@ int main (){
 						//vérification du statut du mob. s'il est déjà empoisonné, le sort ne fonctionne pas.
 						if(compteurPsnM == 0){
 							printf("\nVous lancez Poison !\n");
-							
 							compteurPsnM = 4;
 							printf("Le slime est empoisonne !\n");
-							
 							//Cout du sort de Poison : 10PM.
 							manaPtPlayer -= 10;
 						}else{
@@ -240,6 +243,10 @@ int main (){
 					lifePtMob -= 8;
 					printf("\nLe slime est empoisonne.\n");
 					printf("Il perd 8 PV\n");
+					if(lifePtMob <= 0){
+						boolVictoire = 1;
+						printf("\nLe slime meurt d'empoisonnement. Vous avez gagne !\n");
+					}
 				}
 				
 				probaActM = rand_a_b(a, b);
@@ -267,6 +274,10 @@ int main (){
 						lifePtPlayer -= (10 + ctqDommage);
 						dommage = (10 + ctqDommage);
 						printf("Vous prenez %d de degat.\n", dommage);
+					}
+					if(lifePtPlayer <= 0){
+						boolVictoire = 1;
+						printf("\nMince... Vous avez perdu...\n");
 					}
 				}
 				
@@ -343,17 +354,6 @@ int main (){
 					
 				}
 				
-			}
-			
-			//Vérification Victoire/Défaite (+ Recommencer ?)
-			if(lifePtMob <= 0){
-				boolVictoire = 1;
-				printf("\nBravo ! Vous avez gagne !\n");
-			}
-			
-			if(lifePtPlayer <= 0){
-				boolVictoire = 1;
-				printf("\nMince... Vous avez perdu...\n");
 			}
 			
 			printf("\n------------------------------------------------------\n");
