@@ -41,7 +41,7 @@ int ran_a_b(){
 int main(){
 	//Variable
 		int game = 1;
-		int end = 0;
+		int end;
 		int action;
 		int tamponCriGuerre = -1;
 	
@@ -60,6 +60,7 @@ int main(){
 	while(game == 1){
 		
 		
+		int end = 0;
 		
 		//Combat contre chasseur
 		if(deVigne.lvl < 2 && diPlaza.lvl < 2 && billy.lvl < 2 && ringOfKelly.lvl < 2){
@@ -148,11 +149,6 @@ int main(){
 						billy.aggro = 1;
 					}
 					
-					//Vérif pv mob
-					if(chasseurA <= 0){
-						end = 1;
-					}
-					
 				}else{
 					billy.tamponMort = 1;
 				}	
@@ -216,10 +212,6 @@ int main(){
 						deVigne.atq *= 2;
 						diPlaza.atq *= 2;
 						ringOfKelly.atq *= 2;
-					}
-					
-					if(chasseurA <= 0){
-						end = 1;
 					}
 					
 				}else{
@@ -356,10 +348,6 @@ int main(){
 						chasseurA.pv -= diPlaza.atq;
 					}
 					
-					if(chasseurA <= 0){
-						end = 1;
-					}
-				
 				}else{
 					diPlaza.tamponMort = 1;
 				}
@@ -451,9 +439,6 @@ int main(){
 						
 					}
 					
-					if(chasseurA <= 0){
-						end = 1;
-					}
 					
 				}else{
 					deVigne.tamponMort = 1;
@@ -542,7 +527,7 @@ int main(){
 			ringOfKelly.tamponMort = 0;
 			
 			//ennemie
-			generate corvette = {100, 100, 100, 100, 16, 2, 5, 0, 1, 0, 0, 0, 0};
+			generate corvette = {100, 100, 100, 100, 20, 2, 10, 0, 1, 0, 0, 0, 0};
 			
 			while(end == 0){
 				
