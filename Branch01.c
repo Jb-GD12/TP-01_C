@@ -14,7 +14,6 @@ struct GenaratePjPnj{
 	int lvl;
 	
 	int tamponDef;
-	int tamponPsn;
 	
 	int aggro;
 	
@@ -47,10 +46,10 @@ int main(){
 	
 	//Equipage
 	
-	generate deVigne = {100, 100, 100, 100, 5, 2, 0,10, 1, 0,0, 0, 0};
-	generate diPlaza = {100, 100, 100, 100, 20, 3, 0,10, 1, 0,0, 0, 0};
-	generate billy = {100, 100, 100, 100, 10, 4, 0,10, 1, 0,0, 0, 0};
-	generate ringOfKelly = {100, 100, 100, 100, 15, 3, 0,10, 1, 0,0, 0, 0};
+	generate deVigne = {100, 100, 100, 100, 5, 2, 0,10, 1, 0, 0, 0};
+	generate diPlaza = {100, 100, 100, 100, 20, 3, 0,10, 1, 0, 0, 0};
+	generate billy = {100, 100, 100, 100, 10, 4, 0,10, 1, 0, 0, 0};
+	generate ringOfKelly = {100, 100, 100, 100, 15, 3, 0,10, 1, 0, 0, 0};
 	
 	//Seed
 	srand (time (NULL));
@@ -80,7 +79,7 @@ int main(){
 			ringOfKelly.tamponMort = 0;
 			
 			//ennemie
-			generate chasseurA = {100, 100, 100, 100, 16, 2, 5, 0, 1, 0, 0, 0, 0};
+			generate chasseurA = {100, 100, 100, 100, 16, 2, 5, 0, 1, 0, 0, 0};
 			
 			while(end == 0){
 				
@@ -525,7 +524,7 @@ int main(){
 			ringOfKelly.tamponMort = 0;
 			
 			//ennemie
-			generate corvette = {100, 100, 100, 100, 20, 2, 10, 0, 1, 0, 0, 0, 0};
+			generate corvette = {100, 100, 100, 100, 20, 2, 10, 0, 1, 0, 0, 0};
 			
 			while(end == 0){
 				
