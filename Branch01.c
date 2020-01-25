@@ -542,7 +542,7 @@ int main(){
 			ringOfKelly.tamponMort = 0;
 			
 			//ennemie
-			generate chasseurA = {100, 100, 100, 100, 16, 2, 5, 0, 1, 0, 0, 0, 0};
+			generate corvette = {100, 100, 100, 100, 16, 2, 5, 0, 1, 0, 0, 0, 0};
 			
 			while(end == 0){
 				
@@ -597,7 +597,7 @@ int main(){
 					
 					//atq
 					if(action == 1){
-						chasseurA.pv = attaque(chasseurA.pv, billy.atq, chasseurA.tamponDef, chasseurA.def);
+						corvette.pv = attaque(corvette.pv, billy.atq, corvette.tamponDef, corvette.def);
 					}
 					
 					//def
@@ -609,11 +609,6 @@ int main(){
 					if(action == 3){
 						printf("Billy lance Insulte");
 						billy.aggro = 1;
-					}
-					
-					//Vérif pv mob
-					if(chasseurA <= 0){
-						end = 1;
 					}
 					
 				}else{
@@ -662,7 +657,7 @@ int main(){
 					//atq
 					
 					if(action == 1){
-						chasseurA.pv = attaque(chasseurA.pv, ringOfKelly.atq, chasseurA.tamponDef, chasseurA.def);
+						corvette.pv = attaque(corvette.pv, ringOfKelly.atq, corvette.tamponDef, corvette.def);
 					}
 					
 					//def
@@ -681,9 +676,6 @@ int main(){
 						ringOfKelly.atq *= 2;
 					}
 					
-					if(chasseurA <= 0){
-						end = 1;
-					}
 					
 				}else{
 					ringOfKelly.tamponMort = 1;
@@ -692,27 +684,27 @@ int main(){
 					//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 					
 				//Tour Chasseur
-				if(chasseurA.pv > 0){
+				if(corvette.pv > 0){
 					
 					//afficher PV PA
 					
-					printf("\nPV : %d\n", chasseurA.pv);
-					printf("PA : %d\n", chasseurA.pa);
+					printf("\nPV : %d\n", corvette.pv);
+					printf("PA : %d\n", corvette.pa);
 					
 					//recup PA
 					
-					if(chasseurA.pa < chasseurA.paMax){
-						chasseurA.pa += 5;
-						if(chasseurA.pa > chasseurA.paMax){
-							chasseurA.pa = chasseurA.paMax;
+					if(corvette.pa < corvette.paMax){
+						corvette.pa += 5;
+						if(corvette.pa > corvette.paMax){
+							corvette.pa = corvette.paMax;
 						}
 						printf("\ngain de 5PA\n");
 					}
 					
 					//Réinit Tampon def
 					
-					if(chasseurA.tamponDef == 1){
-						chasseurA.tamponDef = 0;
+					if(corvette.tamponDef == 1){
+						corvette.tamponDef = 0;
 					}
 					
 					//selection de l'action
@@ -725,18 +717,18 @@ int main(){
 						action = ran_a_b();
 						
 						if( action < 25){
-							billy.pv = attaque(billy.pv, chasseurA.atq, billy.tamponDef, billy.def);
+							billy.pv = attaque(billy.pv, corvette.atq, billy.tamponDef, billy.def);
 						}
 						
 						if( action >=25 && action < 50){
-							diPlaza.pv = attaque(diPlaza.pv, chasseurA.atq, diPlaza.tamponDef, diPlaza.def);
+							diPlaza.pv = attaque(diPlaza.pv, corvette.atq, diPlaza.tamponDef, diPlaza.def);
 						}
 						if( action >=50 && action < 75){
-							ringOfKelly.pv = attaque(ringOfKelly.pv, chasseurA.atq, ringOfKelly.tamponDef, ringOfKelly.def);
+							ringOfKelly.pv = attaque(ringOfKelly.pv, corvette.atq, ringOfKelly.tamponDef, ringOfKelly.def);
 						}
 						
 						if( action >= 75){
-							deVigne.pv = attaque(deVigne.pv, chasseurA.atq, deVigne.tamponDef, deVigne.def);
+							deVigne.pv = attaque(deVigne.pv, corvette.atq, deVigne.tamponDef, deVigne.def);
 						}
 						
 					}
@@ -744,7 +736,7 @@ int main(){
 					//def
 					
 					if(action == 2){
-						ringOfKelly.tamponDef = 1;
+						corvette.tamponDef = 1;
 					}
 					
 					//comp
@@ -758,7 +750,7 @@ int main(){
 					}
 					
 				}else{
-					chasseurA.tamponMort = 1;
+					corvette.tamponMort = 1;
 				}	
 					
 				//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -803,7 +795,7 @@ int main(){
 					//atq
 					
 					if(action == 1){
-						chasseurA.pv = attaque(chasseurA.pv, diPlaza.atq, chasseurA.tamponDef, chasseurA.def);
+						corvette.pv = attaque(corvette.pv, diPlaza.atq, corvette.tamponDef, corvette.def);
 					}
 					
 					//def
@@ -816,11 +808,7 @@ int main(){
 					
 					if(action == 3){
 						printf("Di Plaza lance un tir de barrage !");
-						chasseurA.pv -= diPlaza.atq;
-					}
-					
-					if(chasseurA <= 0){
-						end = 1;
+						corvette.pv -= diPlaza.atq;
 					}
 				
 				}else{
@@ -869,7 +857,7 @@ int main(){
 					//atq
 					
 					if(action == 1){
-						chasseurA.pv = attaque(chasseurA.pv, deVigne.atq, chasseurA.tamponDef, chasseurA.def);
+						corvette.pv = attaque(corvette.pv, deVigne.atq, corvette.tamponDef, corvette.def);
 					}
 					
 					//def
@@ -914,10 +902,6 @@ int main(){
 						
 					}
 					
-					if(chasseurA <= 0){
-						end = 1;
-					}
-					
 				}else{
 					deVigne.tamponMort = 1;
 				}	
@@ -931,14 +915,14 @@ int main(){
 				}
 				
 				//si le joueur gagne
-				if(chasseurA.tamponMort == 1){
+				if(corvette.tamponMort == 1){
 					//combat perdu
 					printf("\nVous avez avez gagne !\n");
 					
-					deVigne.xp += chasseurA.xp;
-					diPlaza.xp += chasseurA.xp;
-					ringOfKelly.xp += chasseurA.xp;
-					billy.xp += chasseurA.xp;
+					deVigne.xp += corvette.xp;
+					diPlaza.xp += corvette.xp;
+					ringOfKelly.xp += corvette.xp;
+					billy.xp += corvette.xp;
 					
 					while(deVigne.xp > deVigne.xpMax){
 						deVigne.xp -= deVigne.xpMax;
