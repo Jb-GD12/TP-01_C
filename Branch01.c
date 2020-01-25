@@ -36,6 +36,7 @@ int main(){
 		int game = 1;
 		int end = 0;
 		int action;
+		int tamponCriGuerre = -1;
 	
 	//Equipage
 	
@@ -68,6 +69,22 @@ int main(){
 			
 			while(end == 0){
 				
+				//diminutionn ou/et Réinit tampon criGuerre
+					
+					if(tamponCriGuerre > 0){
+						tamponCriGuerre -= 1;
+					}else{
+						if(tamponCriGuerre == 0){
+							//attaque de toius le monde reinit
+							billy.atq /= 2;
+							deVigne.atq /= 2;
+							diPlaza.atq /= 2;
+							ringOfKelly.atq /= 2;
+							//reinit tampon cri de guerre 
+							tamponCriGuerre = -1;
+						}
+					}
+					
 				//tour Billy
 				
 					//recup PA
@@ -83,6 +100,8 @@ int main(){
 					if(billy.tamponDef == 1){
 						billy.tamponDef = 0;
 					}
+					
+					
 				
 					//afficher PV PA
 					printf("\nPV : %d\n", billy.pv);
@@ -116,24 +135,67 @@ int main(){
 						billy.aggro = 1;
 					}
 					
+					//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+					
 				
 				//tour Ring Of Kelly
 				
 					//afficher PV PA
 					
+					printf("\nPV : %d\n", ringOfKelly.pv);
+					printf("PA : %d\n", ringOfKelly.pa);
+					
 					//recup PA
+					
+					if(ringOfKelly.pa < ringOfKelly.paMax){
+						ringOfKelly.pa += 5;
+						if(ringOfKelly.pa > ringOfKelly.paMax){
+							ringOfKelly.pa = ringOfKelly.paMax;
+						}
+						printf("\ngain de 5PA\n");
+					}
 					
 					//Réinit Tampon def
 					
+					if(ringOfKelly.tamponDef == 1){
+						ringOfKelly.tamponDef = 0;
+					}
+					
 					//selection de l'action
+					
+					printf("\nTapez un chiffre pour choisir une des actions suivantes :\n");
+					printf("1 : attaquer\n2 : defendre\n3 : cri de guerre\n");
+					scanf("%d", &action);
 					
 					//verif action
 					
+					while(action!= 1 && action!= 2 && action!= 3){
+						printf("action non reconnu.\n");
+						printf("1 : attaquer\n2 : defendre\n3 : cri de guerre\n");
+						scanf("%d", &action);
+					}
+					
 					//atq
+					
+					if(action == 1){
+						chasseurA.pv = attaque(chasseurA.pv, ringOfKelly.atq, chasseurA.tamponDef, chasseurA.def);
+					}
 					
 					//def
 					
+					if(action == 2){
+						ringOfKelly.tamponDef = 1;
+					}
+					
 					//comp
+					
+					if(action == 3){
+						printf("Ring Of Kelly lance cri de guerre !");
+						billy.atq *= 2;
+						deVigne.atq *= 2;
+						diPlaza.atq *= 2;
+						ringOfKelly.atq *= 2;
+					}
 					
 				//Tour Chasseur
 				
