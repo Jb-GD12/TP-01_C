@@ -52,7 +52,7 @@ int main(){
 		
 		
 		//Combat contre 1mob
-		if(deVigne.lvl <= 5 && diPlaza.lvl <= 5 && billy.lvl <= 5 && ringOfKelly.lvl <= 0){
+		if(deVigne.lvl <= 5 && diPlaza.lvl <= 5 && billy.lvl <= 5 && ringOfKelly.lvl <= 5){
 			
 			//equipage
 			deVigne.pv = deVigne.pvMax;
