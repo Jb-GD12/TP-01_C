@@ -224,12 +224,10 @@ int main(){
 				if(chasseurA.pv > 0){
 					
 					//afficher PV PA
-					
 					printf("\nPV : %d\n", chasseurA.pv);
 					printf("PA : %d\n", chasseurA.pa);
 					
 					//recup PA
-					
 					if(chasseurA.pa < chasseurA.paMax){
 						chasseurA.pa += 5;
 						if(chasseurA.pa > chasseurA.paMax){
@@ -239,7 +237,6 @@ int main(){
 					}
 					
 					//Réinit Tampon def
-					
 					if(chasseurA.tamponDef == 1){
 						chasseurA.tamponDef = 0;
 					}
@@ -272,18 +269,19 @@ int main(){
 					
 					//def
 					
-					if(action == 2){
-						ringOfKelly.tamponDef = 1;
+					if(action >= 90){
+						chasseurA.tamponDef = 1;
 					}
 					
 					//comp
 					
-					if(action == 3){
-						printf("Ring Of Kelly lance cri de guerre !");
-						billy.atq *= 2;
-						deVigne.atq *= 2;
-						diPlaza.atq *= 2;
-						ringOfKelly.atq *= 2;
+					if(action >= 45 && action < 90){
+						printf("Di Plaza lance Mitrailleuse !");
+						
+						billy.pv -= chasseurA.atq;
+						diPlaza.pv -= chasseurA.atq;
+						ringOfKelly.pv -= chasseurA.atq;
+						deVigne.pv -= chasseurA.atq;
 					}
 					
 				}else{
@@ -672,7 +670,6 @@ int main(){
 				if(corvette.pv > 0){
 					
 					//afficher PV PA
-					
 					printf("\nPV : %d\n", corvette.pv);
 					printf("PA : %d\n", corvette.pa);
 					
@@ -698,7 +695,7 @@ int main(){
 					
 					//atq
 					
-					if(action < 45){
+					if(action < 60){
 						action = ran_a_b();
 						
 						if( action < 25){
@@ -720,18 +717,19 @@ int main(){
 					
 					//def
 					
-					if(action == 2){
-						corvette.tamponDef = 1;
+					if(action >= 90{
+						corvette.pv += 25;
+						corvette.pa -= 30;
 					}
 					
 					//comp
 					
-					if(action == 3){
-						printf("Ring Of Kelly lance cri de guerre !");
-						billy.atq *= 2;
-						deVigne.atq *= 2;
-						diPlaza.atq *= 2;
-						ringOfKelly.atq *= 2;
+					if(action >= 60 && action < 90){
+						printf("Corvette lance Tir de barrage !");
+						billy.pv -= corvette.atq;
+						diPlaza.pv -= corvette.atq;
+						ringOfKelly.pv -= corvette.atq;
+						deVigne.pv -= corvette.atq;
 					}
 					
 				}else{
