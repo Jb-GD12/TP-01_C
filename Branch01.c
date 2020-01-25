@@ -135,7 +135,7 @@ int main(){
 						billy.aggro = 1;
 					}
 					
-					//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+					//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 					
 				
 				//tour Ring Of Kelly
@@ -197,6 +197,8 @@ int main(){
 						ringOfKelly.atq *= 2;
 					}
 					
+					//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+					
 				//Tour Chasseur
 				
 					//afficher PV PA
@@ -217,39 +219,147 @@ int main(){
 					
 				//tour di Plaza
 				
-					//afficher PV PA
+				//afficher PV PA
+					
+					printf("\nPV : %d\n", diPlaza.pv);
+					printf("PA : %d\n", diPlaza.pa);
 					
 					//recup PA
 					
+					if(diPlaza.pa < diPlaza.paMax){
+						diPlaza.pa += 5;
+						if(diPlaza.pa > diPlaza.paMax){
+							diPlaza.pa = diPlaza.paMax;
+						}
+						printf("\ngain de 5PA\n");
+					}
+					
 					//Réinit Tampon def
+					
+					if(diPlaza.tamponDef == 1){
+						diPlaza.tamponDef = 0;
+					}
 					
 					//selection de l'action
 					
+					printf("\nTapez un chiffre pour choisir une des actions suivantes :\n");
+					printf("1 : attaquer\n2 : defendre\n3 : tir de barrage (zone)\n");
+					scanf("%d", &action);
+					
 					//verif action
+					
+					while(action!= 1 && action!= 2 && action!= 3){
+						printf("action non reconnu.\n");
+						printf("1 : attaquer\n2 : defendre\n3 : tir de barrage (zone)\n");
+						scanf("%d", &action);
+					}
 					
 					//atq
 					
+					if(action == 1){
+						chasseurA.pv = attaque(chasseurA.pv, diPlaza.atq, chasseurA.tamponDef, chasseurA.def);
+					}
+					
 					//def
 					
+					if(action == 2){
+						diPlaza.tamponDef = 1;
+					}
+					
 					//comp
+					
+					if(action == 3){
+						printf("Di Plaza lance un tir de barrage !");
+						chasseurA.pv -= diPlaza.atq;
+					}
+				
+					
 					
 				//Tour DeVigne
 				
 					//afficher PV PA
 					
+					printf("\nPV : %d\n", deVigne.pv);
+					printf("PA : %d\n", deVigne.pa);
+					
 					//recup PA
+					
+					if(deVigne.pa < deVigne.paMax){
+						deVigne.pa += 5;
+						if(deVigne.pa > deVigne.paMax){
+							deVigne.pa = deVigne.paMax;
+						}
+						printf("\ngain de 5PA\n");
+					}
 					
 					//Réinit Tampon def
 					
+					if(deVigne.tamponDef == 1){
+						deVigne.tamponDef = 0;
+					}
+					
 					//selection de l'action
+					
+					printf("\nTapez un chiffre pour choisir une des actions suivantes :\n");
+					printf("1 : attaquer\n2 : defendre\n3 : bandage\n");
+					scanf("%d", &action);
 					
 					//verif action
 					
+					while(action!= 1 && action!= 2 && action!= 3){
+						printf("action non reconnu.\n");
+						printf("1 : attaquer\n2 : defendre\n3 : bandage\n");
+						scanf("%d", &action);
+					}
+					
 					//atq
+					
+					if(action == 1){
+						chasseurA.pv = attaque(chasseurA.pv, deVigne.atq, chasseurA.tamponDef, chasseurA.def);
+					}
 					
 					//def
 					
+					if(action == 2){
+						deVigne.tamponDef = 1;
+					}
+					
 					//comp
+					
+					if(action == 3){
+						printf("\nTapez un chiffre pour choisir une des personnes suivantes :\n");
+						printf("1 : Billy\n2 : Ring Of Kelly\n3 : Di Plazza\n4 : De Vigne\n");
+						scanf("%d", &action);
+						
+						while(action!= 1 && action!= 2 && action!= 3 && action!= 4){
+							printf("action non reconnu.\n");
+							printf("1 : Billy\n2 : Ring Of Kelly\n3 : Di Plazza\n4 : De Vigne\n");
+							scanf("%d", &action);
+						}
+						
+						
+						if(action == 1){
+							printf("De Vigne pose un bandage sur Billy !");
+							billy.pv += 15;
+						}
+						
+						if(action == 2){
+							printf("De Vigne pose un bandage sur Ring Of Kelly !");
+							ringOfKelly.pv += 15;
+						}
+						
+						if(action == 3){
+							printf("De Vigne pose un bandage sur Di Plaza !");
+							diPlaza.pv += 15;
+						}
+						
+						if(action == 4){
+							printf("De Vigne se pose un bandage !");
+							deVigne.pv += 15;
+						}
+						
+					}
+					
 					
 				//verifier qui gagne, et le rajout des Xp au joueur
 			}
