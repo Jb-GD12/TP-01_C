@@ -17,7 +17,7 @@ int attaque (pv, atq, def){
 
 // Fonction gain xp
 
-int gainExp ( xpJoueur, xpMonstre, xpMax, lvl){
+int gainExp ( xpJoueur, xpMonstre, xpMax, lvl, atq, pvMax,paMax){
 	xpJoueur += xpMonstre;
 	while(xpJoueur >= xpMax){
 		xpJoueur -= xpMax;
@@ -25,8 +25,8 @@ int gainExp ( xpJoueur, xpMonstre, xpMax, lvl){
 		xpMax += 10;
 		
 		atq += 2;
-		PV += 5;
-		pm += 5;
+		pvMax += 5;
+		paMax += 5;
 		
 		
 	}
