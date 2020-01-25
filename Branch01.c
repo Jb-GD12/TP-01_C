@@ -64,6 +64,8 @@ int main(){
 	printf("\n LUCAS DE VIGNE\nInfirmier\nCoup special : Bandage\nSoigne un membre de l'equipage.\n");
 	printf("\n BILLY\nPremiere classe\nCoup special : Insulte\nPrend l'aggro de l'ennemi.\n");
 	
+	printf("\n*************************************************************************************************\n");
+	
 	//FIGHT
 	
 	while(game == 1){
