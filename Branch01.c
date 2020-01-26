@@ -16,8 +16,6 @@ struct GenaratePjPnj{
 	int tamponDef;
 	
 	int aggro;
-	
-	int tamponFeu;
 };
 typedef struct GenaratePjPnj generate;
 
@@ -48,10 +46,10 @@ int main(){
 	
 	//Equipage
 	
-	generate deVigne = {100, 100, 100, 100, 5, 2, 0,10, 1, 0, 0, 0};
-	generate diPlaza = {100, 100, 100, 100, 20, 3, 0,10, 1, 0, 0, 0};
-	generate billy = {100, 100, 100, 100, 10, 4, 0,10, 1, 0, 0, 0};
-	generate ringOfKelly = {100, 100, 100, 100, 15, 3, 0,10, 1, 0, 0, 0};
+	generate deVigne = {100, 100, 100, 100, 5, 2, 0,10, 1, 0, 0};
+	generate diPlaza = {100, 100, 100, 100, 20, 3, 0,10, 1, 0, 0};
+	generate billy = {100, 100, 100, 100, 10, 4, 0,10, 1, 0, 0};
+	generate ringOfKelly = {100, 100, 100, 100, 15, 3, 0,10, 1, 0, 0};
 	
 	//Seed
 	srand (time (NULL));
@@ -81,15 +79,21 @@ int main(){
 			//equipage (en réinitialisant on évite de repartir au niveau 1)
 			deVigne.pv = deVigne.pvMax;
 			deVigne.pa = deVigne.paMax;
+			
 			diPlaza.pv = diPlaza.pvMax;
 			diPlaza.pa = diPlaza.paMax;
+			
 			billy.pv = billy.pvMax;
 			billy.pa = billy.paMax;
+			billy.aggro = 0;
+			
 			ringOfKelly.pv = ringOfKelly.pvMax;
 			ringOfKelly.pa = ringOfKelly.paMax;
 			
+			tamponCriGuerre = -1;
+			
 			//ennemie
-			generate chasseurA = {100, 100, 100, 100, 16, 2, 5, 0, 1, 0, 0, 0};
+			generate chasseurA = {150, 150, 100, 100, 16, 2, 5, 0, 1, 0, 0};
 			
 			printf("\nUn chasseur vous attaque !\n");
 			printf("\nPV : %d/%d\n",chasseurA.pv,chasseurA.pvMax);
@@ -186,7 +190,7 @@ int main(){
 					
 					if(action == 3){
 						
-						if(billy.pa >= 5 && billy.aggro > 0){
+						if(billy.pa >= 5 && billy.aggro == 0){
 							
 							printf("\nBilly lance Insulte.\n");
 							printf("\nBilly : \"Heu... Heu... Bande de MECHANTS !\"\n");
@@ -293,7 +297,7 @@ int main(){
 					
 					if(action == 3){
 						
-						if(ringOfKelly.pa > 40){
+						if(ringOfKelly.pa >= 40 && tamponCriGuerre == -1){
 							
 							printf("Ring Of Kelly lance cri de guerre !");
 							printf("\nRing of Kelly : \"P... Pour... POUR LA WAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGH !!!!\n");
@@ -307,9 +311,13 @@ int main(){
 							ringOfKelly.pa -= 40;
 							
 						}else{
+							if(tamponCriGuerre > 0){
+								printf("\nMaureen n'a pas assez de voix pour stimuler les troupes...\n");
+							}
 							
-							printf("\nMaureen n'a pas assez de voix pour stimuler les troupes...");
-							printf("(en fait, Maureen n'a pas assez de PA, dommage)\n");
+							if(ringOfKelly.pa < 5){
+								printf("\nMaureen n'a pas assez de voix pour stimuler les troupes...\n");
+							}
 							
 						}
 						
@@ -397,7 +405,7 @@ int main(){
 					
 					//def
 					
-					if(action >= 90){
+					if(action >= 80){
 						
 						printf("\nLe chasseur amorce une mannoeuvre d'evitement.\n");
 						chasseurA.tamponDef = 1;
@@ -406,7 +414,7 @@ int main(){
 					
 					//comp
 					
-					if(action > 46 && action < 89){
+					if(action > 46 && action < 79){
 						
 						if(chasseurA.pa > 30){
 							
@@ -433,12 +441,11 @@ int main(){
 				
 				printf("\n*************************************************************************************************\n");
 				
-				printf("\nDI PLAZA\n");
-				
 				//tour di Plaza
 				
-				//recup PA
 				if(diPlaza.pv > 0 && end == 0){
+					
+					printf("\nDI PLAZA\n");
 					
 					if(diPlaza.pa < diPlaza.paMax){
 						diPlaza.pa += 5;
@@ -503,10 +510,10 @@ int main(){
 
 				printf("\n*************************************************************************************************\n");
 				
-				printf("\nDE VIGNE\n");
-				
 				//Tour DeVigne
 				if(deVigne.pv > 0 && end == 0){
+					
+					printf("\nDE VIGNE\n");
 					
 					//recup PA
 					
@@ -632,71 +639,68 @@ int main(){
 			}
 			
 			//si le joueur gagne
-				if(chasseurA.pv <= 0){
-					//combat reussi
-					printf("\nVous avez avez gagne !\n");
-					end = 1;
-					
-					deVigne.xp += chasseurA.xp;
-					diPlaza.xp += chasseurA.xp;
-					ringOfKelly.xp += chasseurA.xp;
-					billy.xp += chasseurA.xp;
-					
-					while(deVigne.xp > deVigne.xpMax){
-						deVigne.xp -= deVigne.xpMax;
-						deVigne.lvl += 1;
-						deVigne.xpMax += 10;
-						
-						deVigne.atq += 2;
-						deVigne.pv += 5;
-						deVigne.pa += 5;
-						printf("\nDe Vigne monte de niveau.\n");
-					}
-					
-					while(diPlaza.xp > diPlaza.xpMax){
-						diPlaza.xp -= diPlaza.xpMax;
-						diPlaza.lvl += 1;
-						diPlaza.xpMax += 10;
-						
-						diPlaza.atq += 2;
-						diPlaza.pv += 5;
-						diPlaza.pa += 5;
-						printf("\nDi Plaza monte de niveau.\n");
-					}
-					
-					while(ringOfKelly.xp > ringOfKelly.xpMax){
-						ringOfKelly.xp -= ringOfKelly.xpMax;
-						ringOfKelly.lvl += 1;
-						ringOfKelly.xpMax += 10;
-						
-						ringOfKelly.atq += 2;
-						ringOfKelly.pv += 5;
-						ringOfKelly.pa += 5;
-						printf("\nRing Of Kelly monte de niveau.\n");
-					}
-					
-					while(billy.xp > billy.xpMax){
-						billy.xp -= billy.xpMax;
-						billy.lvl += 1;
-						billy.xpMax += 10;
-						
-						billy.atq += 2;
-						billy.pv += 5;
-						billy.pa += 5;
-						printf("\nBilly monte de niveau.\n");
-					}
+			if(chasseurA.pv <= 0){
+				//combat reussi
+				printf("\nVous avez avez gagne !\n");
+				end = 1;
 				
+				deVigne.xp += chasseurA.xp;
+				diPlaza.xp += chasseurA.xp;
+				ringOfKelly.xp += chasseurA.xp;
+				billy.xp += chasseurA.xp;
+				
+				while(deVigne.xp > deVigne.xpMax){
+					deVigne.xp -= deVigne.xpMax;
+					deVigne.lvl += 1;
+					deVigne.xpMax += 10;
 					
+					deVigne.atq += 2;
+					deVigne.pv += 5;
+					deVigne.pa += 5;
+					printf("\nDe Vigne monte de niveau.\n");
 				}
 				
-			
+				while(diPlaza.xp > diPlaza.xpMax){
+					diPlaza.xp -= diPlaza.xpMax;
+					diPlaza.lvl += 1;
+					diPlaza.xpMax += 10;
+					
+					diPlaza.atq += 2;
+					diPlaza.pv += 5;
+					diPlaza.pa += 5;
+					printf("\nDi Plaza monte de niveau.\n");
+				}
+				
+				while(ringOfKelly.xp > ringOfKelly.xpMax){
+					ringOfKelly.xp -= ringOfKelly.xpMax;
+					ringOfKelly.lvl += 1;
+					ringOfKelly.xpMax += 10;
+					
+					ringOfKelly.atq += 2;
+					ringOfKelly.pv += 5;
+					ringOfKelly.pa += 5;
+					printf("\nRing Of Kelly monte de niveau.\n");
+				}
+				
+				while(billy.xp > billy.xpMax){
+					billy.xp -= billy.xpMax;
+					billy.lvl += 1;
+					billy.xpMax += 10;
+					
+					billy.atq += 2;
+					billy.pv += 5;
+					billy.pa += 5;
+					printf("\nBilly monte de niveau.\n");
+				}
+				
+			}
 			
 		}
 		
 		//--------------------------------------------------------------------------------------------------------------------------------
 		
 		//Combat contre corvette
-		if(deVigne.lvl == 2 && diPlaza.lvl == 2 && billy.lvl == 2 && ringOfKelly.lvl == 2){
+		if(deVigne.lvl == 2 && diPlaza.lvl == 2 && billy.lvl == 2 && ringOfKelly.lvl == 2 && end == 1){
 			
 			end = 1;
 			
@@ -709,12 +713,15 @@ int main(){
 			
 			billy.pv = billy.pvMax;
 			billy.pa = billy.paMax;
+			billy.aggro = 0;
 			
 			ringOfKelly.pv = ringOfKelly.pvMax;
 			ringOfKelly.pa = ringOfKelly.paMax;
 			
+			tamponCriGuerre = -1;
+			
 			//ennemie
-			generate corvette = {100, 100, 100, 100, 20, 2, 10, 0, 1, 0, 0, 0};
+			generate corvette = {200, 200, 100, 100, 20, 2, 10, 0, 1, 0, 0};
 			printf("\nUne corvette ennemi vous attaque !.\n");
 			printf("\nPV : %d/%d\n",corvette.pv,corvette.pvMax);
 			printf("\nPA : %d/%d\n",corvette.pa,corvette.paMax);
@@ -797,7 +804,8 @@ int main(){
 					
 					//comp
 					if(action == 3){
-												if(billy.pa >= 5 && billy.aggro > 0){
+						
+						if(billy.pa >= 5 && billy.aggro == 0){
 							
 							printf("\nBilly lance Insulte.\n");
 							printf("\nBilly : \"Heu... Heu... Bande de MECHANTS !\"\n");
@@ -816,7 +824,9 @@ int main(){
 							}
 							
 						}
+							
 					}
+					
 					
 				}	
 				
@@ -882,7 +892,8 @@ int main(){
 					
 					if(action == 3){
 						
-						if(ringOfKelly.pa < 40){
+						if(ringOfKelly.pa >= 40 && tamponCriGuerre == -1){
+							
 							printf("Ring Of Kelly lance cri de guerre !");
 							printf("\nRing of Kelly : \"P... Pour... POUR LA WAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGH !!!!\n");
 							billy.atq *= 2;
@@ -893,9 +904,16 @@ int main(){
 							tamponCriGuerre = 2;
 							
 							ringOfKelly.pa -= 40;
+							
 						}else{
-							printf("\nMaureen n'a pas assez de voix pour stimuler les troupes...");
-							printf("(en fait, Maureen n'a pas assez de PA, dommage)\n");
+							if(tamponCriGuerre > 0){
+								printf("\nMaureen n'a pas assez de voix pour stimuler les troupes...");
+							}
+							
+							if(ringOfKelly.pa < 5){
+								printf("\nMaureen n'a pas assez de voix pour stimuler les troupes...");
+							}
+							
 						}
 						
 					}
@@ -1243,13 +1261,12 @@ int main(){
 					printf("\nBilly monte de niveau.\n");
 				}
 			}
-			
 		}
 
 		//--------------------------------------------------------------------------------------------------------------------------------
 
 		//Combat contre chasseur et corvette
-		if(deVigne.lvl >= 3 && diPlaza.lvl  >= 3 && billy.lvl  >= 3 && ringOfKelly.lvl  >= 3){
+		if(deVigne.lvl >= 3 && diPlaza.lvl  >= 3 && billy.lvl  >= 3 && ringOfKelly.lvl  >= 3 && end == 1){
 			
 			end = 0;
 			
@@ -1262,13 +1279,17 @@ int main(){
 				
 				billy.pv = billy.pvMax;
 				billy.pa = billy.paMax;
+				billy.aggro = 0;
 				
 				ringOfKelly.pv = ringOfKelly.pvMax;
 				ringOfKelly.pa = ringOfKelly.paMax;
+				
+				tamponCriGuerre = -1;
+				
 			
 			//ennemie
-				generate corvette = {100, 100, 100, 100, 20, 4, 10, 0, 1, 0, 0, 0};
-				generate chasseurA = {100, 100, 100, 100, 16, 2, 5, 0, 1, 0, 0, 0};
+				generate corvette = {200, 200, 100, 100, 20, 4, 10, 0, 1, 0, 0};
+				generate chasseurA = {150, 150, 100, 100, 16, 2, 5, 0, 1, 0, 0};
 				
 				printf("\nUn chasseur vous attaque !\n");
 				printf("\nPV : %d/%d\n",chasseurA.pv,chasseurA.pvMax);
@@ -1390,8 +1411,7 @@ int main(){
 					//comp
 					
 					if(action == 3){
-						
-						if(billy.pa >= 5 && billy.aggro > 0){
+						if(billy.pa >= 5 && billy.aggro == 0){
 							
 							printf("\nBilly lance Insulte.\n");
 							printf("\nBilly : \"Heu... Heu... Bande de MECHANTS !\"\n");
@@ -1410,7 +1430,7 @@ int main(){
 							}
 							
 						}
-						
+							
 					}
 					
 				}
@@ -1516,7 +1536,7 @@ int main(){
 					
 					if(action == 3){
 						
-						if(ringOfKelly.pa < 40){
+						if(ringOfKelly.pa >= 40 && tamponCriGuerre == -1){
 							
 							printf("Ring Of Kelly lance cri de guerre !");
 							printf("\nRing of Kelly : \"P... Pour... POUR LA WAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGH !!!!\n");
@@ -1530,9 +1550,13 @@ int main(){
 							ringOfKelly.pa -= 40;
 							
 						}else{
+							if(tamponCriGuerre > 0){
+								printf("\nMaureen n'a pas assez de voix pour stimuler les troupes...");
+							}
 							
-							printf("\nMaureen n'a pas assez de voix pour stimuler les troupes...");
-							printf("(en fait, Maureen n'a pas assez de PA, dommage)\n");
+							if(ringOfKelly.pa < 5){
+								printf("\nMaureen n'a pas assez de voix pour stimuler les troupes...");
+							}
 							
 						}
 						
@@ -1540,14 +1564,16 @@ int main(){
 					
 				}
 				
-					//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+				//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 					
 				printf("\n*************************************************************************************************\n");
 				
-				printf("\nCHASSEUR\n");
+				
 				
 				//Tour Chasseur
 				if(chasseurA.pv > 0 && end == 0){
+					
+					printf("\nCHASSEUR\n");
 					
 					//recup 
 					
@@ -1664,11 +1690,11 @@ int main(){
 				
 				printf("\n*************************************************************************************************\n");
 				
-				printf("\nDI PLAZA\n");
-				
 				//tour di Plaza
 				
 				if(diPlaza.pv > 0 && end == 0){
+					
+					printf("\nDI PLAZA\n");
 					
 					//recup PA
 					if(diPlaza.pa < diPlaza.paMax){
@@ -1999,6 +2025,7 @@ int main(){
 			if(billy.pv <= 0 && ringOfKelly.pv <= 0 && deVigne.pv <= 0 && diPlaza.pv <= 0){
 				printf("vous avez perdu...");
 			}
+			
 			
 			if(chasseurA.pa <= 0 && corvette.pa <= 0){
 				printf("\nVous avez avez gagne !\n");
