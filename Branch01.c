@@ -722,6 +722,8 @@ int main(){
 			
 			//ennemie
 			generate corvette = {200, 200, 100, 100, 20, 2, 10, 0, 1, 0, 0};
+			
+			printf("\n*************************************************************************************************\n");
 			printf("\nUne corvette ennemi vous attaque !.\n");
 			printf("\nPV : %d/%d\n",corvette.pv,corvette.pvMax);
 			printf("\nPA : %d/%d\n",corvette.pa,corvette.paMax);
@@ -1291,6 +1293,7 @@ int main(){
 				generate corvette = {200, 200, 100, 100, 20, 4, 10, 0, 1, 0, 0};
 				generate chasseurA = {150, 150, 100, 100, 16, 2, 5, 0, 1, 0, 0};
 				
+				printf(\n*************************************************************************************************\n);
 				printf("\nUn chasseur vous attaque !\n");
 				printf("\nPV : %d/%d\n",chasseurA.pv,chasseurA.pvMax);
 				printf("\nPA : %d/%d\n",chasseurA.pa,chasseurA.paMax);
