@@ -499,6 +499,7 @@ int main(){
 						if(diPlaza.pa >= 40){
 						printf("Di Plaza lance un tir de barrage !");
 						chasseurA.pv -= diPlaza.atq;
+						diPlaza.pa -= 40;
 						}else{
 							printf("\nLes canons sont enrayes, DiPlaza ne peut pas les utiliser...\n");
 						}
@@ -1072,6 +1073,7 @@ int main(){
 						if(diPlaza.pa >= 40){
 						printf("Di Plaza lance un tir de barrage !");
 						corvette.pv -= diPlaza.atq;
+						diPlaza.pa -= 40;
 						}else{
 							printf("\nLes canons sont enrayes, DiPlaza ne peut pas les utiliser...\n");
 						}
@@ -1289,11 +1291,11 @@ int main(){
 				tamponCriGuerre = -1;
 				
 			
-			//ennemie
+			//ennemi
 				generate corvette = {200, 200, 100, 100, 20, 4, 10, 0, 1, 0, 0};
 				generate chasseurA = {150, 150, 100, 100, 16, 2, 5, 0, 1, 0, 0};
 				
-				printf(\n*************************************************************************************************\n);
+				printf("\n*************************************************************************************************\n");
 				printf("\nUn chasseur vous attaque !\n");
 				printf("\nPV : %d/%d\n",chasseurA.pv,chasseurA.pvMax);
 				printf("\nPA : %d/%d\n",chasseurA.pa,chasseurA.paMax);
@@ -1774,6 +1776,7 @@ int main(){
 						printf("Di Plaza lance un tir de barrage !");
 						chasseurA.pv -= diPlaza.atq;
 						corvette.pv -= diPlaza.atq;
+						diPlaza.pa -= 40;
 						}else{
 							printf("\nLes canons sont enrayes, DiPlaza ne peut pas les utiliser...\n");
 						}
